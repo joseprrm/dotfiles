@@ -1,0 +1,10 @@
+#Sound keys
+xbindkeys
+#Double function keys 
+retardo=200
+xcape -t $retardo -e 'Control_R=slash'
+xcape -t $retardo -e 'Control_L=z'
+[jrrm@x200 ~]$ xcape -t 160 -e 'Control_R=z'
+xcape -t $retardo -e 'Alt_R=comma'
+xcape -t $retardo -e 'Alt_L=x'
+#exec awesome

@@ -1,0 +1,9 @@
+for_window [class="^.*"] border pixel 1
+gaps inner 0 
+gaps outer 0
+smart_gaps off
+smart_borders off
+
+# adjust mocp size
+for_window [title="mocInXterm"] move position 100px 100px
+for_window [title="mocInXterm"] resize set 1080 600

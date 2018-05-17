@@ -1,0 +1,132 @@
+# vim: filetype=i3
+
+# Load wallpaper at startup
+exec_always feh --bg-scale ~/.wallpaper
+
+#Mod4->Super
+set $mod Mod4
+set $terminal "urxvt"
+set $browser1 "qutebrowser"
+set $browser2 "firefox"
+set $menu "dmenu_run"
+set $audioControl "pavucontrol"
+set $ranger "urxvt -e r"
+
+font pango:monospace 8
+
+# Windows color
+#set $cbg    "#c94706"
+#set $cunfo  "#cb8b8b"
+set $cunfo    "#9933ff"
+set $cbg  "#ff9329"
+set $ccolor "#efebe0"
+set $cindi  "#145ba7"
+set $cindiu "#8a9db1"
+
+#<colorclass>           <border> <background> <text>  <indicator> <child_border>
+client.focused          $cbg     $cbg         $ccolor $cindi      $cbg
+client.focused_inactive $cbg     $cunfo       $ccolor $cindiu     $cunfo
+client.unfocused        $cbg     $cunfo       $ccolor $cindiu     $cunfo
+client.urgent           $cbg     $cunfo       $ccolor $cindi      $cunfo
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# mocp floating by default
+for_window [title="mocInXterm"] floating enable
+
+# Programes
+bindsym $mod+Return exec $terminal 
+bindsym $mod+x exec $audioControl
+bindsym $mod+d exec $menu
+bindsym $mod+w exec $browser1
+bindsym $mod+Shift+w exec $browser2
+bindsym $mod+r exec $ranger
+# need to change the title of the windows to make it identifiable in 'for_window [title="mocInXterm"] floating enable'
+bindsym $mod+c exec xterm -xrm 'XTerm.vt100.allowTitleOps: false' -T mocInXterm -e mocp
+
+# mocp shortcuts
+set $pause --no-startup-id mocp -G
+set $next --no-startup-id mocp -f
+set $prev --no-startup-id mocp -r
+bindsym $mod+p			exec $pause
+bindsym $mod+greater	exec $next
+bindsym $mod+less 		exec $prev
+
+# kill focused window
+bindsym $mod+Shift+q kill
+bindsym $mod+q kill
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# better workspace movement
+bindsym $mod+a workspace prev
+bindsym $mod+Escape workspace prev
+bindsym $mod+semicolon workspace next 
+bindsym $mod+m workspace back_and_forth
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# resize focused window
+bindsym $mod+y resize shrink  width 10 px or 10 ppt
+bindsym $mod+i resize grow   height 10 px or 10 ppt
+bindsym $mod+u resize shrink height 10 px or 10 ppt
+bindsym $mod+o resize grow    width 10 px or 10 ppt
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	status_command i3status
+}
